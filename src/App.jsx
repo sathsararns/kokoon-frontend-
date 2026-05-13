@@ -3,6 +3,7 @@ import './App.css'
 import HomePage from './pages/homePage'
 import LoginPage from './pages/loginPage'
 import AdminPage from './pages/adminPage'
+import Test from './pages/test'
 
 function App() {
  
@@ -12,6 +13,7 @@ function App() {
         <Route path='/' element={<HomePage/>} />
         <Route path='/login' element={<LoginPage/>} />
         <Route path='/admin/*' element={<AdminPage/>} />
+        <Route path='/test' element={<Test/>} />
       </Routes>
     </>
   )

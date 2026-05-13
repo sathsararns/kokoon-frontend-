@@ -1,28 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState  } from 'react'
+import { useNavigate } from 'react-router-dom'  
 import { Hand } from 'lucide-react'
 import { FcGoogle } from 'react-icons/fc'
 import toast, { Toaster } from 'react-hot-toast'  // Import Toaster
 import axios from 'axios'
+import api from '../Utils/api'
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
-  async function handleLogin() {
-    toast.success("Email: " + email + " Password: " + password)
+    async function handleLogin() {
+      setLoading(true)
+       try {
+        const res = await api.post("/users/login", {
+          email: email,
+          password: password
+        })
+      
+        localStorage.setItem("token", res.data.token)
+        toast.success("Login successful")
 
-    try {
-      const res = await axios.post("http://localhost:3000/users/login", {
-        email : email,
-        password : password
-    })
-      console.log("Login successful:", res.data)
-    } catch (error) {
-      console.error("Login failed:", error)
-      toast.error("Login failed: " + error.response?.data?.message || error.message)
-    }
-    
-    
+        if (res.data.isAdmin) {
+          navigate("/admin")
+        } else {
+          window.location.href = "/"
+        }
+      } catch (error) {  // 'error' is the parameter name
+        toast.error(error?.response?.data?.message || "Login failed")
+        setLoading(false)  // Move this inside catch block
+      }
+      setLoading(false)  // Remove this line from here
   }
 
   return (
@@ -123,8 +133,9 @@ export default function LoginPage() {
               type="submit"
               className="w-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold py-3 rounded-lg transition-colors mt-2 shadow-sm"
               onClick={handleLogin}
+              disabled={loading}
             >
-              Sign In
+              {loading ? "Loading..." : "Log In"}
             </button>
           </form>
 
