@@ -1,11 +1,19 @@
 import React from 'react'
+ import HeroGrid from '../components/HeroGrid'
+import ServicesSection from '../components/ServicesSection'
+import FAQSection from '../components/FAQSection'
+import Footer from '../components/Footer'
 
-function HI() {
+function HomePage() {
   return (
     <div>
-        <h1 className='text-3xl font-bold bg-amber-400'>HOME PAGE</h1>
+      <HeroGrid/>
+      <ServicesSection/>
+      <FAQSection/>
+      <Footer/>
+        
     </div>
   )
 }
 
-export default HI
+export default HomePage
