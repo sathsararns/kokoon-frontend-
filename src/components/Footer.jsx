@@ -31,10 +31,10 @@ function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="w-full bg-gray-900 text-white px-4 py-12 md:px-8 lg:px-16 xl:px-24 opacity-0 translate-y-8 transition-all duration-700 ease-out"
+      className="w-full bg-[#0D1B3E] text-white px-4 py-12 md:px-8 lg:px-16 xl:px-24 opacity-0 translate-y-8 transition-all duration-700 ease-out"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl  mx-auto">
+        <div className="flex flex-row gap-12 flex-wrap justify-between">
           {/* Logo and Tagline */}
           <div className="flex flex-col">
             <div className="flex items-center mb-4">
