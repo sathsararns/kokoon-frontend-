@@ -159,7 +159,7 @@ function Footer() {
             </a>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+        <div className="mt-12 pt-8 border-t border-white text-center text-gray-400 text-sm">
           Copyright 2025 Home Interior. All Rights Reserved
         </div>
       </div>

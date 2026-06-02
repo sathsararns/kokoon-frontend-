@@ -28,19 +28,19 @@ function AboutUsHeader() {
             <p className={`transition-all duration-700 ease-out transform ${
               isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             } text-teal-400 font-medium tracking-wider`}>
-              FURNITURE SHOP
+              DISTRIBUTION SERVICES
             </p>
             {/* About us heading */}
             <h1 className={`transition-all duration-700 ease-out transform delay-100 ${
               isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             } text-5xl md:text-6xl lg:text-7xl font-bold text-white`}>
-              ABOUT US
+              ABOUT 
             </h1>
             {/* Subtitle */}
             <p className={`transition-all duration-700 ease-out transform delay-200 ${
               isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             } text-lg md:text-xl text-white/90 max-w-2xl`}>
-              Trusted By Over 150,00 Customers Worldwide since 2010
+              Trusted By Over 150,000 Local Providers since 2010
             </p>
             {/* Divider line */}
             <div className={`transition-all duration-700 ease-out transform delay-300 ${
@@ -67,7 +67,7 @@ function AboutUsHeader() {
                 Home
               </a>
               <span className="text-white/70">»</span>
-              <span className="text-white">About us</span>
+              <span className="text-white">About</span>
             </div>
           </div>
         </div>
