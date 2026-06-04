@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { MapPinIcon, MenuIcon, XIcon } from 'lucide-react'
 
@@ -116,5 +115,3 @@ export function Navbar() {
     </header>
   )
 }
-
-export default Navbar
