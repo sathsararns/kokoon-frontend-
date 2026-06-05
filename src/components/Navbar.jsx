@@ -1,117 +1,90 @@
-import React, { useState } from 'react'
-import { MapPinIcon, MenuIcon, XIcon } from 'lucide-react'
+import { NavLink } from "react-router-dom";
+import logo from "../assets/images/logo.png";
 
-export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [active, setActive] = useState('ABOUT')
-
-  const links = ['HOME', 'ABOUT', 'SERVICES', 'CONTACT']
+function Navbar() {
+  const navItems = [
+    { name: "HOME", path: "/" },
+    { name: "ABOUT", path: "/about" },
+    { name: "SERVICES", path: "/services" },
+    { name: "CONTACT", path: "/contact" },
+  ];
 
   return (
-    <header className="w-full bg-[#0b1633]">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-4 flex items-center justify-between">
+    <nav className="bg-[#07184B] h-[70px] w-full">
+      <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 shrink-0">
-          <MapPinIcon
-            className="w-7 h-7 sm:w-8 sm:h-8 text-[#f5b400]"
-            strokeWidth={2.5}
-            fill="#f5b400"
-            stroke="#f5b400"
+        <NavLink to="/">
+          <img
+            src={logo}
+            alt="WedaHub Logo"
+            className="h-12 object-contain"
           />
-          <span className="text-2xl sm:text-3xl font-semibold tracking-tight">
-            <span className="text-[#f5b400]">වැඩ</span>
-            <span className="text-white underline underline-offset-4 decoration-[1.5px]">
-              hub
-            </span>
-          </span>
-        </a>
+        </NavLink>
 
-        {/* Desktop Nav Links */}
-        <ul className="hidden lg:flex items-center gap-8 xl:gap-12">
-          {links.map((link) => (
-            <li key={link}>
-              <a
-                href={`#${link.toLowerCase()}`}
-                onClick={() => setActive(link)}
-                className={`text-sm xl:text-base font-semibold tracking-wide transition-colors ${
-                  active === link
-                    ? 'text-[#f5b400]'
-                    : 'text-white hover:text-[#f5b400]'
-                }`}
-              >
-                {link}
-              </a>
-            </li>
+        {/* Navigation Links */}
+        <div className="flex items-center gap-10">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              end={item.path === "/"}
+              className={({ isActive }) =>
+                `relative text-sm font-medium transition duration-300 ${
+                  isActive
+                    ? "text-[#D4AF37]"
+                    : "text-white hover:text-[#D4AF37]"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  {item.name}
+
+                  {isActive && (
+                    <span className="absolute left-0 -bottom-2 w-full h-[2px] bg-[#D4AF37]"></span>
+                  )}
+                </>
+              )}
+            </NavLink>
           ))}
-        </ul>
+        </div>
 
-        {/* Desktop Buttons */}
-        <div className="hidden lg:flex items-center gap-3">
-          <button
-            type="button"
-            className="px-6 xl:px-8 py-2 rounded-md border border-white/70 text-white text-sm xl:text-base font-medium hover:bg-white/10 transition-colors"
+        {/* Buttons */}
+        <div className="flex items-center gap-4">
+
+          {/* Login */}
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              `px-8 py-2 border rounded-md transition duration-300 ${
+                isActive
+                  ? "bg-white text-[#07184B] border-white"
+                  : "border-white text-white hover:bg-white hover:text-[#07184B]"
+              }`
+            }
           >
             Log In
-          </button>
-          <button
-            type="button"
-            className="px-6 xl:px-8 py-2 rounded-md bg-[#f5b400] text-[#0b1633] text-sm xl:text-base font-semibold hover:bg-[#e0a500] transition-colors"
+          </NavLink>
+
+          {/* Signup */}
+          <NavLink
+            to="/signup"
+            className={({ isActive }) =>
+              `px-8 py-2 rounded-md font-medium transition duration-300 ${
+                isActive
+                  ? "bg-yellow-500 text-black"
+                  : "bg-[#FFC107] text-black hover:bg-yellow-500"
+              }`
+            }
           >
             Sign Up
-          </button>
-        </div>
+          </NavLink>
 
-        {/* Mobile Hamburger */}
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden text-white p-2"
-          aria-label="Toggle menu"
-          aria-expanded={isOpen}
-        >
-          {isOpen ? <XIcon className="w-7 h-7" /> : <MenuIcon className="w-7 h-7" />}
-        </button>
-      </nav>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="lg:hidden border-t border-white/10 px-4 sm:px-6 py-4 space-y-4">
-          <ul className="flex flex-col gap-3">
-            {links.map((link) => (
-              <li key={link}>
-                <a
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => {
-                    setActive(link)
-                    setIsOpen(false)
-                  }}
-                  className={`block text-base font-semibold tracking-wide transition-colors ${
-                    active === link
-                      ? 'text-[#f5b400]'
-                      : 'text-white hover:text-[#f5b400]'
-                  }`}
-                >
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <button
-              type="button"
-              className="w-full sm:w-auto px-6 py-2 rounded-md border border-white/70 text-white text-sm font-medium hover:bg-white/10 transition-colors"
-            >
-              Log In
-            </button>
-            <button
-              type="button"
-              className="w-full sm:w-auto px-6 py-2 rounded-md bg-[#f5b400] text-[#0b1633] text-sm font-semibold hover:bg-[#e0a500] transition-colors"
-            >
-              Sign Up
-            </button>
-          </div>
         </div>
-      )}
-    </header>
-  )
+      </div>
+    </nav>
+  );
 }
+
+export default Navbar;
