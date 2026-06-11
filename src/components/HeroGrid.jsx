@@ -22,7 +22,7 @@ export function HeroGrid() {
     },
     {
       subtitle: 'AI-POWERED ASSISTANT',
-      title: 'CHATBOT FOR SMART SERVICE DISPATCH',
+      title: 'CHATBOT FOR SMART SERVICE ',
       description:
         'Get instant help finding the right local professional. Our intelligent chatbot understands your location, service needs, and availability to connect you with trusted experts in seconds — anywhere, anytime.',
       buttonText: 'FIND SERVICES NOW',
