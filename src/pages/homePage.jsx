@@ -1,21 +1,15 @@
-import React from 'react'
-import  Navbar  from '../components/Navbar'
- import HeroGrid from '../components/HeroGrid'
-import ServicesSection from '../components/ServicesSection'
-import FAQSection from '../components/FAQSection'
-import Footer from '../components/Footer'
+import HeroGrid from "../components/home/HeroGrid";
+import ServicesSection from "../components/home/ServicesSection";
+import FAQSection from "../components/home/FAQSection";
 
 function HomePage() {
   return (
-    <div>
-      <Navbar/> 
-      <HeroGrid/>
-      <ServicesSection/>
-      <FAQSection/>
-      <Footer/>
-        
-    </div>
-  )
+    <>
+      <HeroGrid />
+      <ServicesSection />
+      <FAQSection />
+    </>
+  );
 }
 
-export default HomePage
+export default HomePage;

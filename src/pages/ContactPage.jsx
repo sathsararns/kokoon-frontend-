@@ -1,16 +1,16 @@
 import React from 'react'
-import Footer from '../components/Footer'
-import { ContactSection } from '../components/ContactSection'
-import  LocationMap  from '../components/LocationMap'
-import Navbar from '../components/Navbar'
+
+import { ContactSection } from '../components/contact/ContactSection'
+import  LocationMap  from '../components/contact/LocationMap'
+
 
 function ContactPage() {
   return (
     <div>
-        <Navbar/>
+        
         <ContactSection/>
         <LocationMap/>
-        <Footer/>
+       
     </div>
   )
 }

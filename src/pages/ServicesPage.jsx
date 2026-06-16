@@ -1,16 +1,16 @@
 import React from 'react'
-import ServicesList from '../components/ServicesList'
-import Footer from '../components/Footer'
-import ContactCTA from '../components/ContactCTA'
-import Navbar from '../components/Navbar'
+import ServicesList from '../components/services/ServicesList'
+
+import ContactCTA from '../components/services/ContactCTA'
+
 
 function ServicesPage() {
   return (
     <div>
-      <Navbar/>
+     
         <ServicesList/>
         <ContactCTA/>
-        <Footer/>
+       
     </div>
   )
 }

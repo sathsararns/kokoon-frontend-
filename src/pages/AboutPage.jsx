@@ -1,17 +1,17 @@
-import AboutUsHeader from "../components/AboutUsHeader"
-import Footer from "../components/Footer"
-import Navbar from "../components/Navbar"
-import StatsSection from "../components/StatsSection"
-import VisionMission from "../components/VisionMission"
+import AboutUsHeader from "../components/about/AboutUsHeader"
+
+
+import StatsSection from "../components/about/StatsSection"
+import VisionMission from "../components/about/VisionMission"
 
 function AboutPage() {
   return (
     <div>
-      <Navbar/>
+    
       <AboutUsHeader/>
       <VisionMission/>
       <StatsSection/>
-      <Footer/>
+      
     </div>
   )
 }
