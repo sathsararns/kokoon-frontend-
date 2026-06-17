@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import hero_1 from '../home/assets/images/hero_1.png';
-import hero_2 from '../home/assets/images/hero_2.png';
+// Fix: Update these imports to point to the correct location
+// Assuming images are in src/assets/images/
+import hero_1 from '../../assets/images/hero_1.png';
+import hero_2 from '../../assets/images/hero_2.png';
 
 export function HeroGrid() {
   const slides = [
@@ -91,11 +93,6 @@ export function HeroGrid() {
             alt="Service showcase"
             className="relative z-10 w-auto h-auto max-h-[380px] sm:max-h-[450px] lg:max-h-[520px] object-contain px-6"
           />
-
-          {/* GET LIFETIME ACCESS button - Top Right */}
-            {/* <button className="absolute top-6 sm:top-8 right-6 sm:right-8 z-20 bg-[#0ca59d] hover:bg-[#0a8a84] text-white font-bold py-3 px-5 sm:px-6 text-xs sm:text-sm tracking-wider transition-colors duration-200">
-              GET LIFETIME ACCESS
-            </button> */}
         </div>
       </div>
 

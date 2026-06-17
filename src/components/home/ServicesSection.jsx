@@ -7,12 +7,14 @@ import {
   DropletsIcon,
   FlameIcon,
 } from 'lucide-react'
-import s1 from '../home/assets/images/services/s1.png'
-import s2 from '../home/assets/images/services/s2.png'
-import s3 from '../home/assets/images/services/s3.jpg'
-import s4 from '../home/assets/images/services/s4.jpg'
-import s5 from '../home/assets/images/services/s5.png'
-import s6 from '../home/assets/images/services/s6.jpg'
+// Fix: Update these imports to point to the correct location
+// Assuming images are in src/assets/images/services/
+import s1 from '../../assets/images/services/s1.png'
+import s2 from '../../assets/images/services/s2.png'
+import s3 from '../../assets/images/services/s3.jpg'
+import s4 from '../../assets/images/services/s4.jpg'
+import s5 from '../../assets/images/services/s5.png'
+import s6 from '../../assets/images/services/s6.jpg'
 
 const services = [
   {
@@ -128,4 +130,4 @@ export default function ServicesSection() {
       </div>
     </section>
   )
-} 
+}
