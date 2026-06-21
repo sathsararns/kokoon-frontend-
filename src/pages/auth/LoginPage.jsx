@@ -24,7 +24,6 @@ export default function LoginPage() {
         email,
       });
 
-      // redirect
       if (res.data.isAdmin) navigate("/admin");
       else if (res.data.role === "provider") navigate("/provider");
       else navigate("/customer");
@@ -35,23 +34,34 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="p-6 border rounded w-80 space-y-3">
 
-      <input
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <h2 className="text-xl font-bold">Login</h2>
 
-      <input
-        placeholder="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <input
+          className="w-full border p-2"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <button onClick={handleLogin}>Login</button>
+        <input
+          className="w-full border p-2"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button
+          onClick={handleLogin}
+          className="w-full bg-blue-600 text-white p-2"
+        >
+          Login
+        </button>
+
+      </div>
     </div>
   );
 }

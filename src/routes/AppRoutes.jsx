@@ -9,22 +9,24 @@ import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
 import ServicesPage from "../pages/ServicesPage";
 import ContactPage from "../pages/ContactPage";
+
+// auth
 import LoginPage from "../pages/auth/LoginPage";
 import SignupPage from "../pages/auth/SignupPage";
 
-// customer
+// dashboards
 import CustomerDashboard from "../pages/customer/Dashboard";
 import ProviderDashboard from "../pages/provider/Dashboard";
-import AdminPage from "../pages/admin/AdminPage";
+import AdminDashboard from "../pages/admin/Dashboard";
 
-// route protection
+// routes
 import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppRoutes() {
   return (
     <Routes>
 
-      {/* Public Routes */}
+      {/* PUBLIC */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -32,11 +34,11 @@ export default function AppRoutes() {
         <Route path="/contact" element={<ContactPage />} />
       </Route>
 
-      {/* Auth */}
+      {/* AUTH */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
 
-      {/* Customer Dashboard */}
+      {/* CUSTOMER */}
       <Route
         path="/customer"
         element={
@@ -48,6 +50,7 @@ export default function AppRoutes() {
         <Route index element={<CustomerDashboard />} />
       </Route>
 
+      {/* PROVIDER */}
       <Route
         path="/provider"
         element={
@@ -59,6 +62,7 @@ export default function AppRoutes() {
         <Route index element={<ProviderDashboard />} />
       </Route>
 
+      {/* ADMIN */}
       <Route
         path="/admin"
         element={
@@ -67,7 +71,7 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       >
-        <Route index element={<AdminPage />} />
+        <Route index element={<AdminDashboard />} />
       </Route>
 
     </Routes>

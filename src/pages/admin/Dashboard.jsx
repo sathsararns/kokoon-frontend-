@@ -1,10 +1,8 @@
-export default function AdminPage() {
+export default function AdminDashboard() {
   return (
     <div>
-      <h1 className="text-2xl font-bold">
-        Admin Dashboard
-      </h1>
-      <p>Manage users & system ⚙️</p>
+      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+      <p>System overview</p>
     </div>
   );
-}
+} 

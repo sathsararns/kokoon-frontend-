@@ -14,7 +14,8 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     phone: "",
@@ -30,28 +31,41 @@ export default function SignupPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // ✅ PASSWORD VALIDATION
+  const validatePassword = (password) => {
+    const minLength = password.length >= 8;
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSymbol = /[!@#$%^&*]/.test(password);
+
+    return minLength && hasUpper && hasLower && hasNumber && hasSymbol;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      if (!validatePassword(formData.password)) {
+        toast.error(
+          "Password must be 8+ chars with uppercase, lowercase, number & symbol"
+        );
+        setLoading(false);
+        return;
+      }
+
       const payload = {
         ...formData,
         role,
       };
 
-      const res = await api.post("/users/register", payload);
-
-      localStorage.setItem("token", res.data.token);
+      await api.post("/users/register", payload);
 
       toast.success("Account created successfully");
 
-      // redirect based on role
-      if (role === "provider") {
-        navigate("/provider");
-      } else {
-        navigate("/customer");
-      }
+      if (role === "provider") navigate("/provider");
+      else navigate("/customer");
 
     } catch (err) {
       toast.error(err?.response?.data?.message || "Signup failed");
@@ -70,10 +84,16 @@ export default function SignupPage() {
       >
         <h1 className="text-2xl font-bold text-center">Sign Up</h1>
 
-        {/* basic fields */}
         <input
-          name="name"
-          placeholder="Name"
+          name="firstName"
+          placeholder="First Name"
+          className="w-full border p-2 rounded"
+          onChange={handleChange}
+        />
+
+        <input
+          name="lastName"
+          placeholder="Last Name"
           className="w-full border p-2 rounded"
           onChange={handleChange}
         />
@@ -100,22 +120,16 @@ export default function SignupPage() {
           onChange={handleChange}
         />
 
-        {/* ROLE SELECTOR */}
+        {/* ROLE */}
         <RoleSelector role={role} setRole={setRole} />
 
         {/* CONDITIONAL FIELDS */}
         {role === "customer" && (
-          <CustomerFields
-            formData={formData}
-            handleChange={handleChange}
-          />
+          <CustomerFields formData={formData} handleChange={handleChange} />
         )}
 
         {role === "provider" && (
-          <ProviderFields
-            formData={formData}
-            handleChange={handleChange}
-          />
+          <ProviderFields formData={formData} handleChange={handleChange} />
         )}
 
         <button
