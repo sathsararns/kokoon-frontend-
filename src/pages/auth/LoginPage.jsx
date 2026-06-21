@@ -17,13 +17,18 @@ export default function LoginPage() {
         password,
       });
 
+      // 🔥 SAFE USER OBJECT
       login({
         token: res.data.token,
         role: res.data.role,
         isAdmin: res.data.isAdmin,
-        email,
+        email: res.data.email,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        image: res.data.image
       });
 
+      // 🔥 ROUTING
       if (res.data.isAdmin) navigate("/admin");
       else if (res.data.role === "provider") navigate("/provider");
       else navigate("/customer");

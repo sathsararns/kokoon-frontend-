@@ -1,19 +1,19 @@
-import api from "../Utils/api";
+import api from "../utils/api";
 
-// create booking
 export const createBooking = (data) =>
   api.post("/bookings", data);
 
-export const getBookings = () =>
-  api.get("/bookings");
-// customer bookings
-export const getCustomerBookings = () =>
-  api.get("/bookings/customer");
-
-// provider bookings
 export const getProviderBookings = () =>
-  api.get("/bookings/provider");
+  api.get("/bookings");
 
-// update status
 export const updateBookingStatus = (id, status) =>
   api.put(`/bookings/${id}`, { status });
+
+export const cancelBooking = (id) =>
+  api.delete(`/bookings/${id}`);
+
+export const rateBooking = (id, data) =>
+  api.put(`/bookings/rate/${id}`, data);
+
+export const getProviderRating = (id) =>
+  api.get(`/bookings/rating/${id}`);

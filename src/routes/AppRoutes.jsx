@@ -17,7 +17,7 @@ import SignupPage from "../pages/auth/SignupPage";
 // dashboards
 import CustomerDashboard from "../pages/customer/Dashboard";
 import ProviderDashboard from "../pages/provider/Dashboard";
-import AdminDashboard from "../pages/admin/Dashboard";
+import AdminDashboard from "../pages/admin/AdminDashboard";
 
 // routes
 import ProtectedRoute from "./ProtectedRoute";
@@ -64,15 +64,15 @@ export default function AppRoutes() {
 
       {/* ADMIN */}
       <Route
-        path="/admin"
-        element={
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <DashboardLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<AdminDashboard />} />
-      </Route>
+  path="/admin"
+  element={
+    <ProtectedRoute allowedRoles={["admin"]}>
+      <DashboardLayout />
+    </ProtectedRoute>
+  }
+>
+  <Route index element={<AdminDashboard />} />
+</Route>
 
     </Routes>
   );

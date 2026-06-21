@@ -16,18 +16,28 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  // 🔥 CLEAN LOGIN STRUCTURE
   const login = (data) => {
+    const userData = {
+      token: data.token,
+      role: data.role,
+      isAdmin: data.isAdmin,
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      image: data.image || null   // 🔥 IMPORTANT FIX
+    };
+
     setToken(data.token);
-    setUser(data);
+    setUser(userData);
 
     localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const logout = () => {
     setToken(null);
     setUser(null);
-
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   };
