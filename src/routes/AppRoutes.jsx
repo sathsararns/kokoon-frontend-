@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 // layouts
 import MainLayout from "../layouts/MainLayout";
-import DashboardLayout from "../layouts/DashboardLayout";
+
 
 // pages
 import HomePage from "../pages/HomePage";
@@ -14,10 +14,7 @@ import ContactPage from "../pages/ContactPage";
 import LoginPage from "../pages/auth/LoginPage";
 import SignupPage from "../pages/auth/SignupPage";
 
-// dashboards
-import CustomerDashboard from "../pages/customer/Dashboard";
-import ProviderDashboard from "../pages/provider/Dashboard";
-import AdminDashboard from "../pages/admin/AdminDashboard";
+
 
 // routes
 import ProtectedRoute from "./ProtectedRoute";
@@ -39,40 +36,7 @@ export default function AppRoutes() {
       <Route path="/signup" element={<SignupPage />} />
 
       {/* CUSTOMER */}
-      <Route
-        path="/customer"
-        element={
-          <ProtectedRoute allowedRoles={["customer"]}>
-            <DashboardLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<CustomerDashboard />} />
-      </Route>
-
-      {/* PROVIDER */}
-      <Route
-        path="/provider"
-        element={
-          <ProtectedRoute allowedRoles={["provider"]}>
-            <DashboardLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<ProviderDashboard />} />
-      </Route>
-
-      {/* ADMIN */}
-      <Route
-  path="/admin"
-  element={
-    <ProtectedRoute allowedRoles={["admin"]}>
-      <DashboardLayout />
-    </ProtectedRoute>
-  }
->
-  <Route index element={<AdminDashboard />} />
-</Route>
+      
 
     </Routes>
   );

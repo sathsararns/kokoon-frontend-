@@ -28,10 +28,13 @@ export default function SignupPage() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  // ✅ PASSWORD VALIDATION
+  // Password Validation
   const validatePassword = (password) => {
     const minLength = password.length >= 8;
     const hasUpper = /[A-Z]/.test(password);
@@ -39,12 +42,30 @@ export default function SignupPage() {
     const hasNumber = /[0-9]/.test(password);
     const hasSymbol = /[!@#$%^&*]/.test(password);
 
-    return minLength && hasUpper && hasLower && hasNumber && hasSymbol;
+    return (
+      minLength &&
+      hasUpper &&
+      hasLower &&
+      hasNumber &&
+      hasSymbol
+    );
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    // 🔥 DEBUG
+    console.log("========== SIGNUP DEBUG ==========");
+    console.log("FORM DATA:", formData);
+    console.log("PASSWORD:", formData.password);
+    console.log("PASSWORD LENGTH:", formData.password.length);
+    console.log("HAS UPPER:", /[A-Z]/.test(formData.password));
+    console.log("HAS LOWER:", /[a-z]/.test(formData.password));
+    console.log("HAS NUMBER:", /[0-9]/.test(formData.password));
+    console.log("HAS SYMBOL:", /[!@#$%^&*]/.test(formData.password));
+    console.log("VALID:", validatePassword(formData.password));
+    console.log("=================================");
 
     try {
       if (!validatePassword(formData.password)) {
@@ -60,15 +81,22 @@ export default function SignupPage() {
         role,
       };
 
-      await api.post("/users/register", payload);
+      console.log("PAYLOAD:", payload);
+
+      const res = await api.post("/users/register", payload);
+
+      console.log("SERVER RESPONSE:", res.data);
 
       toast.success("Account created successfully");
 
-      if (role === "provider") navigate("/provider");
-      else navigate("/customer");
+      navigate("/login");
 
     } catch (err) {
-      toast.error(err?.response?.data?.message || "Signup failed");
+      console.log("SERVER ERROR:", err.response?.data);
+
+      toast.error(
+        err.response?.data?.message || "Signup failed"
+      );
     } finally {
       setLoading(false);
     }
@@ -82,7 +110,9 @@ export default function SignupPage() {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-lg shadow-md w-full max-w-xl space-y-4"
       >
-        <h1 className="text-2xl font-bold text-center">Sign Up</h1>
+        <h1 className="text-2xl font-bold text-center">
+          Sign Up
+        </h1>
 
         <input
           name="firstName"
@@ -100,6 +130,7 @@ export default function SignupPage() {
 
         <input
           name="email"
+          type="email"
           placeholder="Email"
           className="w-full border p-2 rounded"
           onChange={handleChange}
@@ -120,16 +151,23 @@ export default function SignupPage() {
           onChange={handleChange}
         />
 
-        {/* ROLE */}
-        <RoleSelector role={role} setRole={setRole} />
+        <RoleSelector
+          role={role}
+          setRole={setRole}
+        />
 
-        {/* CONDITIONAL FIELDS */}
         {role === "customer" && (
-          <CustomerFields formData={formData} handleChange={handleChange} />
+          <CustomerFields
+            formData={formData}
+            handleChange={handleChange}
+          />
         )}
 
         {role === "provider" && (
-          <ProviderFields formData={formData} handleChange={handleChange} />
+          <ProviderFields
+            formData={formData}
+            handleChange={handleChange}
+          />
         )}
 
         <button
