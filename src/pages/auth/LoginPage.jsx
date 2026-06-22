@@ -17,21 +17,19 @@ export default function LoginPage() {
         password,
       });
 
-      // 🔥 SAFE USER OBJECT
+      console.log("LOGIN RESPONSE:", res.data)
+
       login({
         token: res.data.token,
         role: res.data.role,
-        isAdmin: res.data.isAdmin,
         email: res.data.email,
         firstName: res.data.firstName,
         lastName: res.data.lastName,
-        image: res.data.image
+        image: res.data.image || null,
       });
 
-      // 🔥 ROUTING
-      if (res.data.isAdmin) navigate("/admin");
-      else if (res.data.role === "provider") navigate("/provider");
-      else navigate("/customer");
+      // ✅ ALWAYS GO HOME
+      navigate("/");
 
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");

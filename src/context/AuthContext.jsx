@@ -16,16 +16,14 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  // 🔥 CLEAN LOGIN STRUCTURE
   const login = (data) => {
     const userData = {
       token: data.token,
       role: data.role,
-      isAdmin: data.isAdmin,
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
-      image: data.image || null   // 🔥 IMPORTANT FIX
+      image: data.image || null,
     };
 
     setToken(data.token);

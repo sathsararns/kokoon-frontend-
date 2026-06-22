@@ -14,20 +14,23 @@ export default function ProfileDropdown() {
 
   const handleLogout = () => {
     logout();
+    setOpen(false);
     navigate("/");
   };
 
+  if (!user) return null; // safety fix
+
   return (
     <div className="relative" ref={ref}>
-      
-      {/* Avatar */}
+
+      {/* AVATAR */}
       <UserAvatar onClick={() => setOpen(!open)} />
 
-      {/* Dropdown */}
+      {/* DROPDOWN */}
       {open && (
-        <div className="absolute right-0 mt-3 w-56 bg-white shadow-lg rounded-md overflow-hidden z-50">
+        <div className="absolute right-0 mt-3 w-56 bg-white shadow-xl rounded-md overflow-hidden z-50 animate-fadeIn">
 
-          {/* COMMON */}
+          {/* PROFILE */}
           <Link
             to="/profile"
             className="block px-4 py-2 hover:bg-gray-100"
@@ -36,7 +39,7 @@ export default function ProfileDropdown() {
             My Profile
           </Link>
 
-          {/* ROLE BASED MENU */}
+          {/* CUSTOMER */}
           {user?.role === "customer" && (
             <Link
               to="/customer"
@@ -47,6 +50,7 @@ export default function ProfileDropdown() {
             </Link>
           )}
 
+          {/* PROVIDER */}
           {user?.role === "provider" && (
             <>
               <Link
@@ -67,6 +71,7 @@ export default function ProfileDropdown() {
             </>
           )}
 
+          {/* ADMIN */}
           {user?.role === "admin" && (
             <>
               <Link

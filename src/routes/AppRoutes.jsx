@@ -1,8 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-// layouts
 import MainLayout from "../layouts/MainLayout";
-
 
 // pages
 import HomePage from "../pages/HomePage";
@@ -13,11 +11,6 @@ import ContactPage from "../pages/ContactPage";
 // auth
 import LoginPage from "../pages/auth/LoginPage";
 import SignupPage from "../pages/auth/SignupPage";
-
-
-
-// routes
-import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppRoutes() {
   return (
@@ -34,9 +27,6 @@ export default function AppRoutes() {
       {/* AUTH */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-
-      {/* CUSTOMER */}
-      
 
     </Routes>
   );
