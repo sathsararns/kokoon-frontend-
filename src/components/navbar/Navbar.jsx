@@ -8,19 +8,19 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   const { user } = useAuth();
 
-  const defaultImage = "/default-profile.png";
-
   return (
     <nav className="bg-[#07184B] h-[70px] w-full shadow-md">
       <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
 
         {/* LOGO */}
         <NavLink to="/">
-          <img src={logo} className="h-12" />
+          <img src={logo} className="h-12" alt="logo" />
         </NavLink>
 
+        {/* NAV LINKS */}
         <NavLinks />
 
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-4">
 
           {user ? (

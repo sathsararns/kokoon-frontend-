@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
-      image: data.image || null,
+      image: data.image || "/default-profile.png",
     };
 
     setToken(data.token);
