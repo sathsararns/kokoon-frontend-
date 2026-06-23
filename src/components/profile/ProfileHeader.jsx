@@ -1,60 +1,102 @@
-import { useAuth } from "../../context/AuthContext";
+import { uploadImage } from "../../services/uploadService";
 
-export default function ProfileHeader({ profile }) {
-  const { user } = useAuth();
-
+export default function ProfileHeader({
+  profile,
+  setProfile,
+  editing,
+}) {
   const avatar =
     profile?.image ||
-    user?.image ||
-    "https://ui-avatars.com/api/?name=" +
-      encodeURIComponent(
-        `${profile?.firstName || "User"} ${profile?.lastName || ""}`
-      ) +
-      "&background=0D8ABC&color=fff&size=200";
+    `https://ui-avatars.com/api/?name=${profile?.firstName}+${profile?.lastName}`;
+
+  const handleImageUpload = async (e) => {
+  try {
+    const file = e.target.files[0];
+
+    console.log("FILE:", file);
+
+    if (!file) return;
+
+    const imageUrl = await uploadImage(file);
+
+    console.log("IMAGE URL:", imageUrl);
+
+    setProfile({
+      ...profile,
+      image: imageUrl,
+    });
+
+  } catch (error) {
+    console.log("UPLOAD ERROR:", error);
+  }
+};
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-8 mb-8">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
 
-      <div className="flex flex-col items-center">
+      {/* Cover */}
+      <div className="h-40 bg-gradient-to-r from-blue-700 to-indigo-600"></div>
 
-        {/* Avatar */}
-        <img
-          src={avatar}
-          alt="Profile"
-          className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
-          onError={(e) => {
-            e.target.src =
-              "https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff";
-          }}
-        />
+      <div className="flex flex-col items-center -mt-16 pb-8">
 
-        {/* Name */}
-        <h1 className="text-3xl font-bold mt-5">
+        <div className="relative">
+
+          <img
+            src={avatar}
+            alt="profile"
+            className="w-32 h-32 rounded-full border-4 border-white object-cover shadow-lg"
+          />
+
+          {editing && (
+            <>
+              <label
+                htmlFor="profileImage"
+                className="
+                  absolute bottom-0 right-0
+                  bg-blue-600 text-white
+                  rounded-full p-2
+                  cursor-pointer
+                  shadow-lg
+                "
+              >
+                📷
+              </label>
+
+              <input
+                id="profileImage"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageUpload}
+              />
+            </>
+          )}
+
+        </div>
+
+        <h1 className="text-3xl font-bold mt-4">
           {profile.firstName} {profile.lastName}
         </h1>
 
-        {/* Email */}
-        <p className="text-gray-500 mt-1">
+        <p className="text-gray-500">
           {profile.email}
         </p>
 
-        {/* Role Badge */}
         <span
-          className="
-            mt-4
-            px-5
-            py-2
-            rounded-full
-            bg-blue-100
-            text-blue-700
-            font-semibold
-          "
+          className={`mt-3 px-5 py-2 rounded-full font-semibold
+            ${
+              profile?.role === "admin"
+                ? "bg-red-100 text-red-700"
+                : profile?.role === "provider"
+                ? "bg-green-100 text-green-700"
+                : "bg-blue-100 text-blue-700"
+            }
+          `}
         >
-          {profile.role.toUpperCase()}
+          {profile?.role?.toUpperCase()}
         </span>
 
       </div>
-
     </div>
   );
 }
